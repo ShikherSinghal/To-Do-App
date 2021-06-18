@@ -1,16 +1,19 @@
 <link rel="stylesheet" href="https://unpkg.com/blocks.css/dist/blocks.min.css" />
 
 <h1>Welcome to the To Do App!</h1>
-<h3>To test me out, open me in a new tab. </h3>
+<h3>Add item to list by clicking Add button. </h3>
 
 <ul> 
   {% for todo_item in all_items %}
     <li>{{ todo_item.content }}
-    <form action="/deleteTodo/{{todo_item.id}}/" 
-    style="display: inline;"
-    method="post">{% csrf_token %}
-      <input type="submit" value="Delete"/>
-    </form>
+      <form 
+        action="/deleteTodo/{{todo_item.id}}/" 
+        style="display: inline;"
+        method="post"
+      >
+        {% csrf_token %}
+        <input type="submit" value="Delete"/>
+      </form>
     </li>
   {% endfor %}
 </ul>

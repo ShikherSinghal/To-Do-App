@@ -9,11 +9,10 @@ def todoView(request):
   global first_time
   all_todo_items = TodoItem.objects.all()
   if (first_time):
-      new_item = TodoItem(content = "build a cool app on replit.com")
+      new_item = TodoItem(content = "This is first Item")
       new_item.save()
       first_time = False
-  return render(request, 'index.html', 
-  {'all_items': all_todo_items})
+  return render(request, 'index.html', {'all_items': all_todo_items})
 
 def addTodo(request):
   new_item = TodoItem(content = request.POST['content'])
