@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 from .models import TodoItem
 
 first_time = True
@@ -14,11 +15,13 @@ def todoView(request):
       first_time = False
   return render(request, 'index.html', {'all_items': all_todo_items})
 
+@csrf_exempt
 def addTodo(request):
   new_item = TodoItem(content = request.POST['content'])
   new_item.save()
   return HttpResponseRedirect('/')
 
+@csrf_exempt
 def deleteTodo(request, todo_id):
   item_to_delete = TodoItem.objects.get(id=todo_id)
   item_to_delete.delete()
